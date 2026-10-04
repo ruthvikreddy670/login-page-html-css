@@ -39,8 +39,7 @@ https://ruthvikreddy670.github.io/login-page-html-css/
 login-page-html-css/
 ├── index.html      # page structure and login form
 ├── style.css       # all styles, animations and responsive rules
-├── assets/
-│   └── preview.png # screenshot used in this README
+├── preview.png     # screenshot used in this README
 └── README.md
 ```
 
