@@ -2,7 +2,7 @@
 
 An animated, responsive login page with a **night drive** theme, built using only **HTML5** and **CSS3** (no JavaScript).
 
-![Driver Login preview](assets/preview.png)
+![Driver Login preview](preview.png)
 
 ## Live Demo
 
