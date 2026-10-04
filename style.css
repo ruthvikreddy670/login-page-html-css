@@ -1,0 +1,448 @@
+/* ================= Base ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --red: #ff2a2a;
+  --red-dark: #b30f0f;
+  --red-rgb: 255, 42, 42;
+  --steel: #c9ced6;
+  --ink: #f2f2f2;
+  --muted: #8d939c;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Rajdhani", sans-serif;
+  color: var(--ink);
+  background: #050506;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================= Night highway ================= */
+.night {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 500px;
+}
+
+.sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#020203 0%, #0b0b12 35%, #2a0d10 48%, #050506 52%);
+}
+
+/* city skyline on the horizon */
+.city {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 34%;
+  height: 16%;
+  background:
+    radial-gradient(circle, #ffcf7a 1px, transparent 1.6px) 0 0 / 14px 18px,
+    #0a0a0f;
+  clip-path: polygon(0 100%, 0 50%, 4% 50%, 4% 30%, 8% 30%, 8% 60%, 13% 60%, 13% 15%, 16% 15%, 16% 45%, 22% 45%, 22% 25%, 27% 25%, 27% 55%, 33% 55%, 33% 5%, 36% 5%, 36% 40%, 42% 40%, 42% 60%, 48% 60%, 48% 20%, 53% 20%, 53% 50%, 59% 50%, 59% 30%, 64% 30%, 64% 55%, 70% 55%, 70% 10%, 74% 10%, 74% 45%, 80% 45%, 80% 25%, 86% 25%, 86% 50%, 92% 50%, 92% 35%, 100% 35%, 100% 100%);
+  opacity: 0.85;
+}
+
+/* road in 3D perspective */
+.road {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  bottom: -20vh;
+  height: 72vh;
+  transform: rotateX(76deg);
+  transform-origin: bottom;
+  background:
+    linear-gradient(90deg, #fff 0 1%, transparent 1% 99%, #fff 99%),
+    linear-gradient(#141416, #0b0b0c);
+}
+
+/* centre lane dashes rushing towards you */
+.lane {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2%;
+  margin-left: -1%;
+  background: repeating-linear-gradient(transparent 0 60px, #ffd23f 60px 120px);
+  animation: dashes 0.35s linear infinite;
+}
+
+@keyframes dashes {
+  to { background-position: 0 120px; }
+}
+
+/* red glow of tail lights on the horizon */
+.glow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 40%;
+  height: 25%;
+  background: radial-gradient(ellipse at 50% 40%, rgba(255, 42, 42, 0.35), transparent 60%);
+  animation: pulse-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+  from { opacity: 0.6; }
+  to   { opacity: 1; }
+}
+
+/* streaks of light from fast cars */
+.trail {
+  position: absolute;
+  left: 0;
+  width: var(--w);
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent, var(--c));
+  box-shadow: 0 0 12px var(--c), 0 0 24px var(--c);
+  animation: zoom var(--t) linear infinite;
+  animation-delay: var(--d);
+}
+
+@keyframes zoom {
+  from { transform: translateX(-50vw); }
+  to   { transform: translateX(150vw); }
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.85));
+}
+
+/* ================= Card ================= */
+.scene {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 24px 16px;
+  perspective: 1000px;
+}
+
+/* carbon fibre panel that slides in fast */
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  padding: 26px 34px 32px;
+  border-radius: 16px;
+  background:
+    linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+    linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0,
+    linear-gradient(27deg, #222 5px, transparent 5px) 0 10px,
+    linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+    linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+    linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+  background-color: #131313;
+  background-size: 20px 20px;
+  border: 1px solid #333;
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(var(--red-rgb), 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  animation: drift-in 1s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+@keyframes drift-in {
+  0%   { opacity: 0; transform: translateX(-120vw) skewX(-20deg); }
+  70%  { opacity: 1; transform: translateX(20px) skewX(4deg); }
+  100% { transform: none; }
+}
+
+/* two red racing stripes on top */
+.card::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  margin-left: -30px;
+  background: linear-gradient(90deg, transparent 0 8px, rgba(var(--red-rgb), 0.12) 8px 24px, transparent 24px 36px, rgba(var(--red-rgb), 0.12) 36px 52px, transparent 52px);
+  pointer-events: none;
+}
+
+/* ---- rev counter ---- */
+.gauge {
+  position: relative;
+  width: 170px;
+  height: 100px;
+  margin: 0 auto 6px;
+  overflow: hidden;
+}
+
+/* half circle dial with tick marks and a red zone */
+.dial {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background:
+    repeating-conic-gradient(from 270deg, rgba(255, 255, 255, 0.7) 0 1deg, transparent 1deg 18deg),
+    conic-gradient(from 270deg, transparent 0 140deg, rgba(var(--red-rgb), 0.85) 140deg 180deg, transparent 180deg);
+  -webkit-mask: radial-gradient(circle, transparent 64%, #000 65% 72%, transparent 73%);
+          mask: radial-gradient(circle, transparent 64%, #000 65% 72%, transparent 73%);
+}
+
+.needle {
+  position: absolute;
+  left: 50%;
+  bottom: 15px;
+  width: 4px;
+  height: 66px;
+  margin-left: -2px;
+  border-radius: 4px;
+  background: linear-gradient(var(--red), #ff8a8a);
+  box-shadow: 0 0 10px var(--red);
+  transform-origin: bottom center;
+  transform: rotate(-90deg);
+  animation: rev 2.2s 0.9s cubic-bezier(0.3, 0, 0.3, 1) forwards, idle 1.5s 3.1s ease-in-out infinite alternate;
+}
+
+/* the engine revs up to the red line then settles at idle */
+@keyframes rev {
+  0%   { transform: rotate(-90deg); }
+  55%  { transform: rotate(78deg); }
+  70%  { transform: rotate(60deg); }
+  100% { transform: rotate(-40deg); }
+}
+
+@keyframes idle {
+  from { transform: rotate(-40deg); }
+  to   { transform: rotate(-34deg); }
+}
+
+.hub {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #eee, #444);
+}
+
+.rpm {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+h1 {
+  position: relative;
+  text-align: center;
+  font-family: "Teko", sans-serif;
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field input {
+  width: 100%;
+  padding: 13px 14px;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid #333;
+  border-bottom: 2px solid #444;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.field input::placeholder {
+  color: #5c6168;
+}
+
+.field input:focus {
+  border-color: #555;
+  border-bottom-color: var(--red);
+  box-shadow: 0 6px 16px -6px rgba(var(--red-rgb), 0.7);
+}
+
+.options {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--steel);
+  cursor: pointer;
+}
+
+.remember input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--red);
+}
+
+a {
+  color: #ff5a5a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+}
+
+/* start engine button: revs (shakes), glows and pulses on hover */
+.btn {
+  position: relative;
+  width: 100%;
+  padding: 14px;
+  font-family: "Teko", sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(180deg, var(--red), var(--red-dark));
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 20px rgba(var(--red-rgb), 0.35);
+  transition: box-shadow 0.3s;
+}
+
+.btn span {
+  position: relative;
+  display: inline-block;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid var(--red);
+  opacity: 0;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  animation: engine 0.12s linear infinite;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 30px rgba(var(--red-rgb), 0.8), 0 0 60px rgba(var(--red-rgb), 0.4);
+  outline: none;
+}
+
+.btn:hover::after,
+.btn:focus-visible::after {
+  animation: ring 1s ease-out infinite;
+}
+
+@keyframes engine {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(1px, -1px); }
+  50%  { transform: translate(-1px, 1px); }
+  75%  { transform: translate(1px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes ring {
+  from { opacity: 0.9; transform: scale(1); }
+  to   { opacity: 0; transform: scale(1.12, 1.4); }
+}
+
+.btn:active {
+  animation: none;
+  transform: scale(0.98);
+}
+
+.signup {
+  position: relative;
+  margin-top: 22px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+/* ================= Mobile ================= */
+@media (max-width: 480px) {
+  .card {
+    padding: 22px 20px 26px;
+  }
+
+  h1 {
+    font-size: 38px;
+  }
+
+  .road {
+    left: 5%;
+    right: 5%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Night highway ===== -->
+  <div class="night" aria-hidden="true">
+    <div class="sky"></div>
+    <div class="city"></div>
+    <div class="road"><div class="lane"></div></div>
+    <div class="glow"></div>
+
+    <!-- light trails from passing cars -->
+    <span class="trail" style="top:58%; --c:#ff2a2a; --t:1.4s; --d:0s;    --w:34vw"></span>
+    <span class="trail" style="top:63%; --c:#ffffff; --t:1.1s; --d:-0.4s; --w:28vw"></span>
+    <span class="trail" style="top:70%; --c:#ff2a2a; --t:0.9s; --d:-0.7s; --w:40vw"></span>
+    <span class="trail" style="top:76%; --c:#ffb12a; --t:1.3s; --d:-0.2s; --w:30vw"></span>
+    <span class="trail" style="top:82%; --c:#ffffff; --t:0.8s; --d:-0.5s; --w:45vw"></span>
+    <span class="trail" style="top:88%; --c:#ff2a2a; --t:1s;   --d:-0.9s; --w:38vw"></span>
+    <span class="trail" style="top:52%; --c:#ffffff; --t:1.8s; --d:-1.1s; --w:20vw"></span>
+
+    <div class="vignette"></div>
+  </div>
+
+  <!-- ===== Login card ===== -->
+  <main class="scene">
+    <form class="card" action="#">
+
+      <!-- rev counter -->
+      <div class="gauge" aria-hidden="true">
+        <div class="dial"></div>
+        <span class="needle"></span>
+        <span class="hub"></span>
+        <span class="rpm">RPM x1000</span>
+      </div>
+
+      <h1>Driver Login</h1>
+
+      <div class="field">
+        <label for="user">Username or Email</label>
+        <input type="text" id="user" placeholder="driver@garage.com" autocomplete="username" required>
+      </div>
+
+      <div class="field">
+        <label for="pass">Password</label>
+        <input type="password" id="pass" placeholder="••••••••" autocomplete="current-password" required>
+      </div>
+
+      <div class="options">
+        <label class="remember"><input type="checkbox" id="remember"> Remember me</label>
+        <a href="#">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="btn"><span>Start Engine</span></button>
+
+      <p class="signup">New driver? <a href="#">Sign Up</a></p>
+    </form>
+  </main>
+
+</body>
+</html>
